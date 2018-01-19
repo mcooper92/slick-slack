@@ -17,7 +17,7 @@ export default () => {
   return (
     <Container style={styles.body}>
       <Link style={{ textDecoration: 'none' }} to="">
-        <h1>slackk-casa</h1>
+        <h1>Slick-Slack</h1>
       </Link>
       <br />
       <FormGroup>

@@ -4,6 +4,7 @@ import MessageList from './MessageList.jsx';
 import WorkSpaceList from './WorkSpaceList.jsx';
 import PropTypes from 'prop-types';
 
+
 //container for other containers
 export default class Body extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class Body extends React.Component {
       messages,
       loadWorkSpaces,
       changeCurrentWorkSpace,
-      currentWorkSpaceId,
+      currentWorkSpaceId
     } = this.props;
     return (
       <Container fluid>

@@ -6,8 +6,12 @@ import MessageList from './MessageList.jsx';
 import TypingAlert from './TypingAlert.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import Body from './Body.jsx';
+<<<<<<< c8aee4ecf43111d29b269e8608ae8d3ee7c9e1f2
 import Dropzone from 'react-dropzone';
 import upload from 'superagent';
+=======
+import EditProfile from './EditProfile.jsx';
+>>>>>>> Added USer Profile
 
 // The main component of the App. Renders the core functionality of the project.
 export default class App extends React.Component {
@@ -23,7 +27,7 @@ export default class App extends React.Component {
       // Default message informs the user to select a workspace
       messages: [
         {
-          text: 'Welcome to slackk-casa! Please select or create a workspace!',
+          text: 'Welcome to slick-slack! Please select or create a workspace!',
           username: 'Slack-bot',
           id: 0,
           createdAt: new Date(),
@@ -35,6 +39,9 @@ export default class App extends React.Component {
       query: '',
       currentWorkSpaceId: 0,
       currentWorkSpaceName: '',
+      editClicked: false,
+      userData:[],
+      usersData: []
     };
     this.onDrop = this.onDrop.bind(this);
     this.toggler = this.toggler.bind(this);
@@ -131,17 +138,51 @@ export default class App extends React.Component {
   changeCurrentWorkSpace(id, name) {
     this.setState({ currentWorkSpaceId: id, currentWorkSpaceName: name });
   }
+
   // renders nav bar, body(which contains all message components other than input), and message input
+
+
+
+handleEditClick(event) {
+  //console.log('I WAS CLICKED!')
+   this.setState({editClicked: !this.state.editClicked});
+   this.getUserData(this.props.location.state.username);
+   console.log("here", this.state.userData);
+}
+
+
+
+getUserData() {
+  fetch('/users', {
+    method: 'POST',
+    body: JSON.stringify({username: this.props.location.state.username }),
+    headers: {'content-type': 'application/json'},
+  })
+    .then(resp => resp.json())
+    .then((data) => this.setState({userData: data}))
+    .then(() => console.log("I GOT DATA!", this.state.userData))
+    .catch(console.error);
+}
+
+
+
+  //renders nav bar, body(which contains all message components other than input), and message input
   render() {
     let {
-      messages, query, workSpaces, currentWorkSpaceId, currentWorkSpaceName,
+      messages, query, workSpaces, currentWorkSpaceId, currentWorkSpaceName, editProfile, userData
     } = this.state;
     let typing;
     const timer = 5000;
     return (
       <div className="app-container">
-        <NavBar currentWorkSpaceName={currentWorkSpaceName} username={this.props.location.state.username} />
+        <NavBar currentWorkSpaceName={currentWorkSpaceName} username={this.props.location.state.username} handleEditClick={this.handleEditClick.bind(this)} userData={userData}/>
         <ProgressBar progress={this.state.progress} progressValue={this.state.progressValue} />
+        <div className="edit-profile">
+          {this.state.editClicked ? (<EditProfile handleEditClick={this.handleEditClick.bind(this)} userData={userData}/> ) : (null)
+          
+          }
+        
+      </div>
         <Body
           messages={messages}
           workSpaces={workSpaces}
@@ -186,8 +227,21 @@ export default class App extends React.Component {
               // onKeyUp={typing = setTimeout(() => { this.setState({ renderTyping: false }); }), timer}
             />
           </div>
+
+
+        <div className="input-container">
+          <Input
+            value={query}
+            className="message-input-box"
+            type="textarea"
+            name="text"
+            placeholder={`Message #${currentWorkSpaceName || 'select a workspace!'}`}
+            onChange={event => this.handleChange(event)}
+            onKeyPress={event => this.handleKeyPress(event)}
+          />
         </div>
       </div>
+      
     );
   }
 }

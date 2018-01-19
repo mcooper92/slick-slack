@@ -53,7 +53,7 @@ export default class Login extends React.Component {
           })
           : this.setState({
             loginStatus:
-                  'Looks like someone forget to set a password hint. Try making a new account instead!',
+                  'Looks like someone forgot to set a password hint. Try making a new account instead!',
           })))
       .catch(console.error);
   }

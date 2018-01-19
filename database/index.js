@@ -88,6 +88,9 @@ const createWorkspace = (name, dbName = `ws_${name[0]}${Date.now()}`) =>
 // pull list of workspaces from database
 const getWorkspaces = () => client.query('SELECT * FROM workspaces').then(data => data.rows);
 
+
+const getUserData = (username) => client.query('SELECT * FROM users WHERE username = ($1)', [username])
+.then(data => data.rows[0]);
 // pull all emails from users table
 const getEmails = () => client.query('SELECT email FROM USERS')
   .then(data => data.rows);
@@ -110,4 +113,5 @@ module.exports = {
   getWorkspaces,
   getEmails,
   getPasswordHint,
+  getUserData
 };

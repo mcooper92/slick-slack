@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ModalExample from './ModalExample.jsx'
 
 import {
   Collapse,
@@ -44,7 +45,7 @@ export default class NavBar extends React.Component {
         <NavbarBrand>
           <h1>slick-slack</h1>
 
-          <h6 style={styles}>Logged In As: {this.props.username}</h6>
+          <h6 style={styles}>{this.props.username} (you) </h6>
         </NavbarBrand>
         <h3 className="text-center">
           #{this.props.currentWorkSpaceName || 'select a workspace!'}{' '}
@@ -54,9 +55,12 @@ export default class NavBar extends React.Component {
           <Nav className="ml-auto" navbar>
             <UncontrolledDropdown nav>
               <DropdownToggle nav caret>
-                Options
+                Settings
               </DropdownToggle>
               <DropdownMenu>
+                <NavLink onClick={this.props.handleEditClick}>
+                  <DropdownItem>Edit Profile</DropdownItem>
+                </NavLink>
                 <NavLink href="/login">
                   <DropdownItem>Sign Out</DropdownItem>
                 </NavLink>

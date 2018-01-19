@@ -18,8 +18,8 @@ const sendWelcomeEmail = async (username, email) => {
     const message = {
       from: `${process.env.EMAIL_USERNAME}`,
       to: email,
-      subject: `Welcome to slackk-casa, ${username}!`,
-      text: 'Thanks for joining slackk-casa! We hope you have a great time using our service!',
+      subject: `Welcome to Slick-Slack, ${username}!`,
+      text: 'Thanks for joining Slick-Slack! We hope you have a great time using our service!',
     };
     return await transporter.sendMail(message);
   } catch (err) {

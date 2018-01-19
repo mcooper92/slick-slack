@@ -23,12 +23,17 @@ router.use(passport.session());
 // helper response function to redirect react router paths to index.html
 const reactRoute = (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 
+
+
 router.use(express.static(path.join(__dirname, '../client/dist')));
 
 // send index.html for react router's routes
 router.get('/signup', reactRoute);
 router.get('/login', reactRoute);
 router.get('/messages', passport.authenticate('local', { failureRedirect: '/login' }), reactRoute);
+router.get('/editProfile', function(req, res) {
+    res.redirect('/EditProfile'); 
+});
 
 // POST request to /signup, used to register users
 /*
@@ -133,6 +138,21 @@ router.post('/recover', async (req, res) => {
   }
 });
 
+
+
+
+router.post('/users', bodyParser.json());
+router.post('/users', async (req, res) => {
+  console.log("USERNAME SHOULD IS:", req.body.username)
+  try {
+    const data = await db.getUserData(req.body.username);
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json(err.stack)
+  }
+});
+
+
 // GET request to /workspaces, return array of workspaces
 /*
   Returns to client array of workspace objects
@@ -179,5 +199,6 @@ router.post('/workspaces', async (req, res) => {
     return res.status(500).json(err.stack);
   }
 });
+
 
 module.exports = router;
