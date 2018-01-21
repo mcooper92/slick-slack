@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ModalExample from './ModalExample.jsx'
+import ModalExample from './ModalExample.jsx';
+import AvailableOrAway from './AvailableOrAway.jsx';
+
 
 import {
   Collapse,
@@ -46,6 +48,7 @@ export default class NavBar extends React.Component {
           <h1>slick-slack</h1>
 
           <h6 style={styles}>{this.props.username} (you) </h6>
+          <AvailableOrAway changeStatus={this.props.changeStatus} userStatus={this.props.userStatus}/>
         </NavbarBrand>
         <h3 className="text-center">
           #{this.props.currentWorkSpaceName || 'select a workspace!'}{' '}
@@ -59,7 +62,7 @@ export default class NavBar extends React.Component {
               </DropdownToggle>
               <DropdownMenu>
                 <NavLink onClick={this.props.handleEditClick}>
-                  <DropdownItem>Edit Profile</DropdownItem>
+                  <DropdownItem>View Profile</DropdownItem>
                 </NavLink>
                 <NavLink href="/login">
                   <DropdownItem>Sign Out</DropdownItem>

@@ -16,7 +16,7 @@ var styles = {
   fontWeight:'bold'
 };
 
-export default class EditProfile extends React.Component {
+export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     };
@@ -47,4 +47,3 @@ export default class EditProfile extends React.Component {
     );
   }
 }
-

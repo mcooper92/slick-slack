@@ -35,13 +35,13 @@ class ModalExample extends React.Component {
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="myinput">My Status</Label>
+                <Label for="myinput">Enter a new status below!</Label>
                 <Input name="something" id="myinput" />
               </FormGroup>
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={this.toggle}>Ok</Button>
+            <Button color="secondary" onClick={this.toggle}>Update Status</Button>
           </ModalFooter>
         </Modal>
       </div>

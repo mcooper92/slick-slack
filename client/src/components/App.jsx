@@ -6,12 +6,11 @@ import MessageList from './MessageList.jsx';
 import TypingAlert from './TypingAlert.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import Body from './Body.jsx';
-<<<<<<< c8aee4ecf43111d29b269e8608ae8d3ee7c9e1f2
 import Dropzone from 'react-dropzone';
 import upload from 'superagent';
-=======
+
 import EditProfile from './EditProfile.jsx';
->>>>>>> Added USer Profile
+
 
 // The main component of the App. Renders the core functionality of the project.
 export default class App extends React.Component {
@@ -41,7 +40,8 @@ export default class App extends React.Component {
       currentWorkSpaceName: '',
       editClicked: false,
       userData:[],
-      usersData: []
+      usersData: [],
+      availableOrAway: 'Available'
     };
     this.onDrop = this.onDrop.bind(this);
     this.toggler = this.toggler.bind(this);
@@ -147,10 +147,11 @@ handleEditClick(event) {
   //console.log('I WAS CLICKED!')
    this.setState({editClicked: !this.state.editClicked});
    this.getUserData(this.props.location.state.username);
-   console.log("here", this.state.userData);
 }
 
-
+handleClickStatus(event) {
+  this.setState({availableOrAway: event.target.innerText});
+}
 
 getUserData() {
   fetch('/users', {
@@ -175,10 +176,10 @@ getUserData() {
     const timer = 5000;
     return (
       <div className="app-container">
-        <NavBar currentWorkSpaceName={currentWorkSpaceName} username={this.props.location.state.username} handleEditClick={this.handleEditClick.bind(this)} userData={userData}/>
+        <NavBar currentWorkSpaceName={currentWorkSpaceName} changeStatus={this.handleClickStatus.bind(this)} username={this.props.location.state.username} handleEditClick={this.handleEditClick.bind(this)} userData={userData} userStatus={this.state.availableOrAway}/>
         <ProgressBar progress={this.state.progress} progressValue={this.state.progressValue} />
         <div className="edit-profile">
-          {this.state.editClicked ? (<EditProfile handleEditClick={this.handleEditClick.bind(this)} userData={userData}/> ) : (null)
+          {this.state.editClicked ? (<EditProfile handleEditClick={this.handleEditClick.bind(this)} userData={userData} userStatus={this.state.availableOrAway}/> ) : (null)
           
           }
         
@@ -227,20 +228,8 @@ getUserData() {
               // onKeyUp={typing = setTimeout(() => { this.setState({ renderTyping: false }); }), timer}
             />
           </div>
-
-
-        <div className="input-container">
-          <Input
-            value={query}
-            className="message-input-box"
-            type="textarea"
-            name="text"
-            placeholder={`Message #${currentWorkSpaceName || 'select a workspace!'}`}
-            onChange={event => this.handleChange(event)}
-            onKeyPress={event => this.handleKeyPress(event)}
-          />
-        </div>
       </div>
+    </div>
       
     );
   }
