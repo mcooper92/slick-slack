@@ -8,8 +8,6 @@ import { Alert, FormGroup} from 'reactstrap';
 
 import { Container, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label} from 'reactstrap';
 
-import ModalExample from './ModalExample.jsx'
-
 
 var styles = {
   color:'green',

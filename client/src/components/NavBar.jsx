@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ModalExample from './ModalExample.jsx';
 import AvailableOrAway from './AvailableOrAway.jsx';
 
 
