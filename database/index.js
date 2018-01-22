@@ -88,9 +88,13 @@ const createWorkspace = (name, dbName = `ws_${name[0]}${Date.now()}`) =>
 // pull list of workspaces from database
 const getWorkspaces = () => client.query('SELECT * FROM workspaces').then(data => data.rows);
 
-
+//pulls info for passed in username
 const getUserData = (username) => client.query('SELECT * FROM users WHERE username = ($1)', [username])
 .then(data => data.rows[0]);
+
+const changeUserStatus = (username, status) => client.query('UPDATE users SET status = ($2) WHERE username = ($1)', [username, status])
+
+
 // pull all emails from users table
 const getEmails = () => client.query('SELECT email FROM USERS')
   .then(data => data.rows);
@@ -113,5 +117,6 @@ module.exports = {
   getWorkspaces,
   getEmails,
   getPasswordHint,
-  getUserData
+  getUserData,
+  changeUserStatus
 };

@@ -29,16 +29,15 @@ export default class Profile extends React.Component {
      <div>
       <Card>
         <CardBody>
-          <CardTitle>{this.props.userData.username}</CardTitle>
-          <CardSubtitle>{this.props.userData.status}</CardSubtitle> 
+          <CardTitle>{this.props.clickedUsersData.username}</CardTitle>
 
         </CardBody>
-        <img width="100%" src="http://www.freegreatpicture.com/files/166/29787-apple-mac-os-x-lion-system-wallpaper.jpg" alt="Card image cap" />
+        <img width="100%" src="http://www.tridanim.com/images/static.boredpanda.com/blog/wp-content/uploads/2015/09/happy-cat-smiling-4__880.jpg" alt="Card image cap" />
         <CardBody>
-          <CardText>Email: {this.props.userData.email}</CardText>
+          <CardText>Email: {this.props.clickedUsersData.email}</CardText>
 
            <h5>Current Status:</h5>
-           <h6 style={styles}>{this.props.userStatus}</h6>
+           <h6 style={styles}>{this.props.clickedUsersStatus}</h6>
           <br/>
         </CardBody>
       </Card>

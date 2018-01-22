@@ -30,7 +30,6 @@ export default class EditProfile extends React.Component {
       <Card>
         <CardBody>
           <CardTitle>{this.props.userData.username}</CardTitle>
-          <CardSubtitle>{this.props.userData.status}</CardSubtitle> 
 
         </CardBody>
         <img width="100%" src="http://www.freegreatpicture.com/files/166/29787-apple-mac-os-x-lion-system-wallpaper.jpg" alt="Card image cap" />

@@ -140,12 +140,33 @@ router.post('/recover', async (req, res) => {
 
 
 
-
+//GETs info for current user from DB
 router.post('/users', bodyParser.json());
 router.post('/users', async (req, res) => {
-  console.log("USERNAME SHOULD IS:", req.body.username)
   try {
     const data = await db.getUserData(req.body.username);
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json(err.stack)
+  }
+});
+
+
+//GETs info for clicked user from DB
+router.post('/clickedUser', bodyParser.json());
+router.post('/clickedUser', async (req, res) => {
+  try {
+    const data = await db.getUserData(req.body.username);
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(500).json(err.stack)
+  }
+});
+
+router.post('/usersStatus', bodyParser.json());
+router.post('/usersStatus', async (req, res) => {
+  try {
+    const data = await db.changeUserStatus(req.body.username, req.body.status);
     return res.status(200).json(data);
   } catch (err) {
     return res.status(500).json(err.stack)
